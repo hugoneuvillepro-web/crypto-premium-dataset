@@ -1,0 +1,34 @@
+name: Update Crypto Dataset
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install ccxt pandas requests
+
+      - name: Run dataset bot
+        env:
+          GITHUB_TOKEN: ${{ secrets.DATASET_GITHUB_TOKEN }}
+        run: python crypto_dataset_bot_simple.py
+
+      - name: Commit and push CSV
+        run: |
+          git config --global user.email "bot@github.com"
+          git config --global user.name "DataBot"
+          git add crypto_premium_dataset_latest.csv
+          git diff --staged --quiet || git commit -m "Update dataset $(date +%Y-%m-%d)"
+          git push
