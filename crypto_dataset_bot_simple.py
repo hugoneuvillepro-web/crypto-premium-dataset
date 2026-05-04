@@ -123,7 +123,7 @@ for symbol in COINS:
 
 final = pd.concat(all_dfs, ignore_index=True)
 final = final.sort_values(["symbol", "date"]).reset_index(drop=True)
-filepath = "/home/hugo51100/crypto_premium_dataset_latest.csv"
+filepath = "crypto_premium_dataset_latest.csv"
 final.to_csv(filepath, index=False)
 print(f"{len(final)} lignes, {len(final.columns)} colonnes")
 upload_to_github(filepath, "crypto_premium_dataset_latest.csv")
