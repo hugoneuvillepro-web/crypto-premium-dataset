@@ -3,9 +3,6 @@ import ccxt
 import pandas as pd
 import requests
 from datetime import datetime
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
 import base64
 
 COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT"]
