@@ -29,6 +29,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DATASET_GITHUB_TOKEN }}
         run: python crypto_dataset_bot_simple.py
 
+     - name: Commit and push CSV
+        run: |
+          git config --global user.email "bot@github.com"
+          git config --global user.name "DataBot"
+          git add -f crypto_premium_dataset_latest.csv
+          git diff --staged --quiet || git commit -m "Update dataset $(date +%Y-%m-%d)"
+          git pull origin main --no-rebase
+          git push
+          
       - name: Commit and push CSV
         run: |
           git config --global user.email "bot@github.com"
