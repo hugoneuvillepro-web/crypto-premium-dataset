@@ -6,21 +6,18 @@ from datetime import datetime
 import base64
 import time 
 
-COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT", "DOGE/USDT", "AVAX/USDT"]
+COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT"]
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = "hugoneuvillepro-web/crypto-premium-dataset"
 
 def get_ohlcv(symbol):
     coin_ids = {
-        "BTC/USDT": "bitcoin",
-        "ETH/USDT": "ethereum",
-        "SOL/USDT": "solana",
-        "BNB/USDT": "binancecoin",
-        "XRP/USDT": "ripple",
-        "ADA/USDT": "cardano",
-        "AVAX/USDT": "avalanche-2",
-        "DOGE/USDT": "dogecoin",
-    }
+    "BTC/USDT": "bitcoin",
+    "ETH/USDT": "ethereum",
+    "SOL/USDT": "solana",
+    "BNB/USDT": "binancecoin",
+    "XRP/USDT": "ripple",
+}
     
     coin_id = coin_ids[symbol]
     try:
