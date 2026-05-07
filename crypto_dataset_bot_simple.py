@@ -5,7 +5,7 @@ import requests
 from datetime import datetime
 import base64
 
-COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT"]
+COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT", "ADA/USDT", "AVAX/USDT"]
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = "hugoneuvillepro-web/crypto-premium-dataset"
 
@@ -15,7 +15,11 @@ def get_ohlcv(symbol):
         "ETH/USDT": "ethereum",
         "SOL/USDT": "solana",
         "BNB/USDT": "binancecoin"
+        "XRP/USDT": "ripple",
+        "ADA/USDT": "cardano",
+        "AVAX/USDT": "avalanche-2",
     }
+    
     coin_id = coin_ids[symbol]
     try:
         url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/ohlc?vs_currency=usd&days=365"
