@@ -29,9 +29,9 @@ jobs:
         run: |
           git config --global user.email "bot@github.com"
           git config --global user.name "DataBot"
+          git fetch origin
+          git reset --hard origin/main
+          python crypto_dataset_bot_simple.py
           git add crypto_premium_dataset_latest.csv
-          git stash
-          git pull --rebase
-          git stash pop
           git diff --staged --quiet || git commit -m "Update dataset $(date +%Y-%m-%d)"
           git push
