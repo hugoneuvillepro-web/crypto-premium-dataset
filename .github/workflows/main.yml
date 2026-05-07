@@ -33,4 +33,4 @@ jobs:
           git config --global user.name "DataBot"
           git add -f crypto_premium_dataset_latest.csv
           git diff --staged --quiet || git commit -m "Update dataset $(date +%Y-%m-%d)"
-          git push
+          git push --force
