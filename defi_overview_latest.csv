@@ -1,0 +1,2 @@
+protocol,name,tvl_usd,change_1d,change_7d,category,chains
+lido,Lido,20201486621.03199,-4.695717507841522,-2.2678099388907356,Liquid Staking,"['Ethereum', 'Solana', 'Moonbeam', 'Moonriver', 'Terra']"
