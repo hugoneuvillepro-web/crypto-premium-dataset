@@ -14,7 +14,7 @@ def get_ohlcv(symbol):
         "BTC/USDT": "bitcoin",
         "ETH/USDT": "ethereum",
         "SOL/USDT": "solana",
-        "BNB/USDT": "binancecoin"
+        "BNB/USDT": "binancecoin",
         "XRP/USDT": "ripple",
         "ADA/USDT": "cardano",
         "AVAX/USDT": "avalanche-2",
