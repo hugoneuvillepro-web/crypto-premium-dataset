@@ -25,7 +25,7 @@ def get_ohlcv(symbol):
     try:
         url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/ohlc?vs_currency=usd&days=365"
         response = requests.get(url, timeout=15).json()
-time.sleep(2)
+        time.sleep(2)
         df = pd.DataFrame(response, columns=["timestamp", "open", "high", "low", "close"])
         df["date"] = pd.to_datetime(df["timestamp"], unit="ms").dt.strftime("%Y-%m-%d")
         df["volume"] = None
