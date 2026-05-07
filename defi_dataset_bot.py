@@ -9,8 +9,8 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = "hugoneuvillepro-web/crypto-premium-dataset"
 
 PROTOCOLS = [
-    "uniswap", "aave", "curve", "lido", 
-    "makerdao", "compound", "pancakeswap"
+    "lido", "aave-v3", "uniswap-v3", "curve-dex",
+    "makerdao", "compound-v3", "pancakeswap-amm"
 ]
 
 def get_protocol_tvl(protocol):
