@@ -13,9 +13,9 @@ GITHUB_REPO = "hugoneuvillepro-web/crypto-premium-dataset"
 def get_ohlcv(symbol):
     print(f"  Collecte prix {symbol}...")
     try:
-        import ccxt
-        exchange = ccxt.binance()
-        ohlcv = exchange.fetch_ohlcv(symbol, "1d", limit=365)
+        exchange = ccxt.kraken()
+        kraken_symbol = symbol.replace("USDT", "USD")
+        ohlcv = exchange.fetch_ohlcv(kraken_symbol, "1d", limit=365)
         df = pd.DataFrame(ohlcv, columns=["timestamp", "open", "high", "low", "close", "volume"])
         df["date"] = pd.to_datetime(df["timestamp"], unit="ms").dt.strftime("%Y-%m-%d")
         df["symbol"] = symbol.replace("/USDT", "")
