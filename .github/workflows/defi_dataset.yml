@@ -1,0 +1,30 @@
+name: Update DeFi Dataset
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-defi-dataset:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.DATASET_GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pandas
+
+      - name: Run DeFi dataset bot
+        env:
+          GITHUB_TOKEN: ${{ secrets.DATASET_GITHUB_TOKEN }}
+        run: python defi_dataset_bot.py
