@@ -11,13 +11,22 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = "hugoneuvillepro-web/crypto-premium-dataset"
 
 def get_ohlcv(symbol):
-    coin_ids = {
-    "BTC/USDT": "bitcoin",
-    "ETH/USDT": "ethereum",
-    "SOL/USDT": "solana",
-    "BNB/USDT": "binancecoin",
-    "XRP/USDT": "ripple",
-}
+    print(f"  Collecte prix {symbol}...")
+    try:
+        import ccxt
+        exchange = ccxt.binance()
+        ohlcv = exchange.fetch_ohlcv(symbol, "1d", limit=365)
+        df = pd.DataFrame(ohlcv, columns=["timestamp", "open", "high", "low", "close", "volume"])
+        df["date"] = pd.to_datetime(df["timestamp"], unit="ms").dt.strftime("%Y-%m-%d")
+        df["symbol"] = symbol.replace("/USDT", "")
+        df.drop("timestamp", axis=1, inplace=True)
+        df = df.groupby("date").last().reset_index()
+        time.sleep(1)
+        print(f"  OK - {symbol}")
+        return df
+    except Exception as e:
+        print(f"  ERREUR {symbol} : {e}")
+        return None
     
     coin_id = coin_ids[symbol]
     try:
