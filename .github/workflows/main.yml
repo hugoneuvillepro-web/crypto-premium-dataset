@@ -8,6 +8,8 @@ on:
 jobs:
   update-dataset:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -29,9 +31,6 @@ jobs:
         run: |
           git config --global user.email "bot@github.com"
           git config --global user.name "DataBot"
-          git fetch origin
-          git reset --hard origin/main
-          python crypto_dataset_bot_simple.py
-          git add crypto_premium_dataset_latest.csv
+          git add -f crypto_premium_dataset_latest.csv
           git diff --staged --quiet || git commit -m "Update dataset $(date +%Y-%m-%d)"
           git push
