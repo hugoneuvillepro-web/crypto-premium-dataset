@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 from datetime import datetime
 import base64
+import time 
 
 COINS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT", "ADA/USDT", "AVAX/USDT"]
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
@@ -24,6 +25,7 @@ def get_ohlcv(symbol):
     try:
         url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/ohlc?vs_currency=usd&days=365"
         response = requests.get(url, timeout=15).json()
+time.sleep(2)
         df = pd.DataFrame(response, columns=["timestamp", "open", "high", "low", "close"])
         df["date"] = pd.to_datetime(df["timestamp"], unit="ms").dt.strftime("%Y-%m-%d")
         df["volume"] = None
